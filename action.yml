@@ -23,11 +23,6 @@ runs:
         echo -e "default-cache-ttl 7200\nmax-cache-ttl 31536000\nallow-preset-passphrase" >> "${HOME}/.gnupg/gpg-agent.conf"
         gpg-connect-agent RELOADAGENT /bye
         cat "${HOME}/.gnupg/gpg-agent.conf"
-    # TODO: Remove when test is complete
-    - name: Get info from key
-      shell: bash
-      run: |
-        gpg -K --with-keygrip
     - name: Extract variables from key
       shell: bash
       run: |
@@ -44,10 +39,6 @@ runs:
         gpg-connect-agent "PRESET_PASSPHRASE ${KEYGRIP_SECRET} -1 ${HEX_PASSPHRASE}" /bye
         gpg-connect-agent "PRESET_PASSPHRASE ${KEYGRIP_PUBLIC} -1 ${HEX_PASSPHRASE}" /bye
         gpg-connect-agent "KEYINFO --list" /bye
-    # TODO: Remove when test is complete
-    - name: GPG sign and verify
-      shell: bash
-      run: echo "Hej" | gpg --armor --sign -u ${KEY_FP} | gpg --verify
     - name: Configure git
       shell: bash
       run: |
@@ -55,7 +46,3 @@ runs:
           git config user.email ${KEY_EMAIL}
           git config user.signingkey ${KEY_ID}
           git config commit.gpgsign true
-    # TODO: Remove when test is complete
-    - name: Debug git
-      shell: bash
-      run: git config --list
