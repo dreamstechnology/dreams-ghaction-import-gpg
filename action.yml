@@ -22,7 +22,6 @@ runs:
       run: |
         echo -e "default-cache-ttl 7200\nmax-cache-ttl 31536000\nallow-preset-passphrase" >> "${HOME}/.gnupg/gpg-agent.conf"
         gpg-connect-agent RELOADAGENT /bye
-        cat "${HOME}/.gnupg/gpg-agent.conf"
     - name: Extract variables from key
       shell: bash
       run: |
