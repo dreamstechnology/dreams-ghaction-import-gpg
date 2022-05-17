@@ -37,7 +37,6 @@ runs:
         HEX_PASSPHRASE=$(echo -n ${{ inputs.passphrase }} | od -An -tx1 | tr -d ' \n' | tr 'a-f' 'A-F')
         gpg-connect-agent "PRESET_PASSPHRASE ${KEYGRIP_SECRET} -1 ${HEX_PASSPHRASE}" /bye
         gpg-connect-agent "PRESET_PASSPHRASE ${KEYGRIP_PUBLIC} -1 ${HEX_PASSPHRASE}" /bye
-        gpg-connect-agent "KEYINFO --list" /bye
     - name: Configure git
       shell: bash
       run: |
