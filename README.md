@@ -24,17 +24,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      # Need to checkout the action repo like this because it's a private repo
-      - name: Checkout action from private repo
-        uses: actions/checkout@v2
-        with:
-          repository: dreamstechnology/dreams-ghaction-import-gpg
-          ref: refs/tags/v0.1
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./.github/actions/dreams-ghaction-import-gpg
-
       - name: Import GPG key
-        uses: ./.github/actions/dreams-ghaction-import-gpg
+        uses: dreamstechnology/dreams-ghaction-import-gpg@v1
         with:
           private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_KEY_PASS }}
